@@ -37,10 +37,12 @@ const ParallaxBanner = ({ children, className, layers, style, disabled }) => {
                     // save props to be merged
                     const layerStyle = props.style || {};
                     const layerClass = props.className || '';
+		    const outerStyle = props.outerStyle || {};
 
                     // remove from pass through props
                     delete props.style;
                     delete props.className;
+		    delete props.outerStyle;
 
                     const layerClassMerged = `parallax-banner-layer-${i}${
                         layerClass ? ` ${layerClass}` : ''
@@ -67,7 +69,7 @@ const ParallaxBanner = ({ children, className, layers, style, disabled }) => {
                             key={`layer-${i}`}
                             y={[amount * -1 * 100 + '%', amount * 100 + '%']}
                             styleInner={absoluteStyle}
-                            styleOuter={absoluteStyle}
+                            styleOuter={absoluteStyle, ...outerStyle}
                             disabled={disabled}
                         >
                             <div
